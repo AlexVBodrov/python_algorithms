@@ -53,8 +53,12 @@ def defense_armor(person1, person2):
     return resis
 
 def attack(person1, person2):
-    return person2['health'] - defense_armor(person1, person2)
+     damage = person2['health'] - defense_armor(person1, person2)
+     return damage
 
 print(attack(player, enemy))
 print(attack(enemy, player))
+
+print(player)
+print(enemy)
 
