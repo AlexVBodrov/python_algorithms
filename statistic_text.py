@@ -4,12 +4,17 @@
 """
 s_2 = []
 s_3 = []
+l_all = ""
+# получим объект файла wizard_oz.txt
+file1 = open("text_1.txt", "r")
+for l in file1:
+    l_all = l_all+l
+l_all = l_all.replace("\n", " ")
+#print(l_all)
+line = l_all
 
-# получим объект файла
-file1 = open("file_text.txt", "r", encoding='utf-8')
-line = file1.readline()
-""" TODO обрабатывать все строки а не 1 """
-"""TODO переписать циклы как функцию """
+"""TODO переписать циклы как функцию принимающую кол во символов (число) идущих по порядку"""
+
 start_2 = 0
 stop_2 = 2
 line_index_2 = 1
@@ -33,9 +38,16 @@ while line_index_3 != len(line):
 # закрываем файл
 file1.close()
 
-my_dict_2 = {i: s_2.count(i) for i in s_2}
-my_dict_3 = {i: s_3.count(i) for i in s_3}
+""" выводить с повторениями более 50 """
+my_dict_2 = {i: s_2.count(i) for i in s_2 if s_2.count(i) > 99}
+my_dict_3 = {i: s_3.count(i) for i in s_3 if s_3.count(i) > 99}
 
-"""TODO выводить с повторениями более 20 """
+
 print(my_dict_2)
 print(my_dict_3)
+
+with open('out.txt','w') as out:
+    for key,val in my_dict_2.items():
+        out.write('{}:{}\n'.format(key,val))
+    for key,val in my_dict_3.items():
+        out.write('{}:{}\n'.format(key,val))

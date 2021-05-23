@@ -1,33 +1,59 @@
-import os
+from core import copy_file, create_folder, create_file
+from core import delete_file, save_info, get_list, change_dir
+import sys
 
+save_info("Старт")
 
-def create_file(name: str, text=None):
-    """ create new file """
-    with open(name, "w", encoding='utf-8') as new_file:
-        if text:
-            new_file.write(text)
+try:
+    command = sys.argv[1]
+except IndexError:
+    print("Необходимо ввести команду, или help => справка")
+else:
 
+    if command == "list":
+        get_list()
+    elif command == "create_file":
+        try:
+            name = sys.argv[2]
+        except IndexError:
+            print("Ошибка! введите название файла")
+        else:
+            create_file(name)
+    elif command == "create_dir":
+        try:
+            name = sys.argv[2]
+        except IndexError:
+            print("Ошибка! введите название папки")
+        else:
+            create_folder(name)
+    elif command == "chdir":
+        try:
+            name = sys.argv[2]
+        except IndexError:
+            print("Ошибка! введите название папки")
+        else:
+            change_dir(name)
+    elif command == "delete":
+        try:
+            name = sys.argv[2]
+        except IndexError:
+            print("Ошибка! введите название файла")
+        else:
+            delete_file(name)
+    elif command == "copy":
+        try:
+            name = sys.argv[2]
+            new_name = sys.argv[3]
+        except IndexError:
+            print("Ошибка! введите название файла")
+        else:
+            copy_file(name, new_name)
+    elif command == "help":
+        print("help  => справка")
+        print("list  =>  список файлов")
+        print("create_file name  => создать файл: name")
+        print("create_dir name  => создать dir: name")
+        print("delete name => удалить файл: name")
+        print("copy name new_name => скопировать файл: name в файл new_name")
 
-def create_folder(name):
-    try:
-        os.mkdir(name)
-    except FileExistsError:
-        print(f"ОШИБКА !!! папка => {name} <= Уже была создана")
-
-
-def delete_folder(name):
-    try:
-        os.rmdir(name)
-    except FileNotFoundError:
-        print(f"ОШИБКА !!! Не удается найти => {name} <= папку:")
-
-
-def get_list(folders_only=False):
-    result = os.listdir()
-    if folders_only:
-        result = [f for f in result if os.path.isdir(f)]
-    print(*result, sep="\n")
-
-
-if __name__ == "__main__":
-    get_list()
+save_info("Конец")
