@@ -24,7 +24,7 @@ print(json_ed)
 with open('group.pickle', "wb") as file:
     file.write(pickled)
 
-with open('group.json', "w",  encoding='utf-8') as file:
+with open('group.json', "w", encoding='utf-8') as file:
     json.dump(music_serialize.my_favourite_group, file)
 """
 2: Создать модуль music_deserialize.py. В этом модуле открыть файлы group.json и group.pickle,
@@ -41,7 +41,8 @@ with open('group.pickle', "rb") as file:
 print(my_dict, "\n", 'Pickle') #-work
 
 
-with open('group.json', "r",  encoding='utf-8') as file:
+with open('group.json', "r", encoding='utf-8') as file:
     my_dict_original = json.load(file)
 
 print(my_dict_original, "\n",  "Json")
+print(type(my_dict_original), ",", type(my_dict))

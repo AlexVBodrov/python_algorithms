@@ -12,8 +12,7 @@ with open('group.pickle', "rb") as file:
 #print(my_dict) #-work
 
 
-with open('group.json', "r",  encoding='utf-8') as file:
-    pass
+with open('group.json', "r", encoding='utf-8') as file:
     #data = json.load(read_file)
     my_dict_original = json.load(file)
 

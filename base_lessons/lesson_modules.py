@@ -7,16 +7,16 @@
 import os, sys
 
 def create_dir_1_9():
-    for i in range(1, 10):
-        make_path = os.path.join(os.getcwd(), f'dir_{i}')
+    for _ in range(1, 10):
+        make_path = os.path.join(os.getcwd(), f'dir_{_}')
         #os.mkdir(new_dir) - make dir
         # повторный запуск mkdir с тем же именем вызывает FileExistsError
         if not os.path.isdir(make_path):
             os.mkdir(make_path)
 
 def del_dir_1_9():
-    for i in range(1, 10):
-        make_path = os.path.join(os.getcwd(), f'dir_{i}')
+    for _ in range(1, 10):
+        make_path = os.path.join(os.getcwd(), f'dir_{_}')
         # удалить папку
         os.rmdir(make_path)
 
@@ -50,8 +50,6 @@ if __name__ == '__main__':
 Вызовите каждую функцию в main.py и проверьте что все работает как надо.
 Примечание: Попробуйте импортировать как весь модуль целиком (например из задачи 1), так и отдельные функции из модуля. 
 """
-from create_dir_1_9 import create_dir_1_9 as mk_dir9
-from create_dir_1_9 import del_dir_1_9 as del_dir9
 import return_random_el_list
 
 if __name__ == '__main__':
