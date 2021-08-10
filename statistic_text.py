@@ -39,8 +39,8 @@ while line_index_3 != len(line):
 file1.close()
 
 """ выводить с повторениями более 50 """
-my_dict_2 = {i: s_2.count(i) for i in s_2 if s_2.count(i) > 99}
-my_dict_3 = {i: s_3.count(i) for i in s_3 if s_3.count(i) > 99}
+my_dict_2 = {i: s_2.count(i) for i in s_2 if s_2.count(i) > 500}
+my_dict_3 = {i: s_3.count(i) for i in s_3 if s_3.count(i) > 500}
 
 
 print(my_dict_2)
