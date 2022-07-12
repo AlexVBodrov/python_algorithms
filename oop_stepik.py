@@ -203,7 +203,7 @@ for i in range(217):
     elements.append(random.choice([Line(0, 0, 0, 0), Rect(a, b, c, d), Ellipse(a, b, c, d)] ))
 """
 # №7
-"""
+'''
 # здесь объявите класс TriangleChecker
 
 
@@ -250,4 +250,257 @@ class TriangleChecker:
 
 tr = TriangleChecker(3, 4, 5)
 tr.is_triangle()
+'''
+# № 8
+"""
+
+class Graph:
+    def __init__(self, data: list, show: bool = True) -> None:
+        ''' должны формироваться следующие локальные свойства: data - ссылка на список из числовых данных (у каждого объекта должен быть свой список с данными);
+            is_show - булево значение (True/False) для показа (True) и сокрытия (False) данных графика (по умолчанию True);
+        '''
+        self.data = data.copy()  # по условию т.з. и чтобы тесты проходило
+        self.is_show = show
+
+    def set_data(self, data: list) -> None:
+        # для передачи нового списка данных в текущий график
+        setattr(self, 'data', data)
+
+    def show_table(self) -> None:
+        # для отображения данных в виде строки из списка чисел через пробел
+        if self.is_show:
+            print(*self.data)  # return ' '.join(map(str, self.data))
+        else:
+            print('Отображение данных закрыто')
+
+    def show_graph(self) -> None:
+        '''для отображения данных в виде графика (метод выводит в консоль
+         сообщение: "Графическое отображение данных: <строка из чисел
+         следующих через пробел>")
+        '''
+        if self.is_show:
+            print(f'Графическое отображение данных: ', end='')
+            print(*self.data)
+        else:
+            print('Отображение данных закрыто')
+
+    def show_bar(self) -> None:
+        ''' для отображения данных в виде столбчатой диаграммы
+        (метод выводит в консоль сообщение: "Столбчатая диаграмма:
+        <строка из чисел следующих через пробел>");
+        '''
+        if self.is_show:
+            print(f'Столбчатая диаграмма: ', end='')
+            print(*self.data)
+        else:
+            print('Отображение данных закрыто')
+
+    def set_show(self, fl_show: bool) -> None:
+        '''метод для изменения локального свойства is_show
+        на переданное значение fl_show.'''
+        self.is_show = fl_show
+
+
+# считывание списка из входного потока (эту строку не менять)
+data_graph = list(map(int, input().split()))
+
+# здесь создаются объекты классов и вызываются нужные методы
+gr = Graph(data_graph)
+gr.show_bar()
+gr.set_show(fl_show=False)
+gr.show_table()
+"""
+"""
+ # №9
+CPU - класс для описания процессоров;
+Memory - класс для описания памяти;
+MotherBoard - класс для описания материнских плат.
+
+class CPU:
+    ''' Объекты классов должны иметь следующие локальные свойства: 
+    для класса CPU: name - наименование; fr - тактовая частота;
+    для класса Memory: name - наименование; volume - объем памяти;
+    '''
+    def __init__(self, name: str, fr: int) -> None:
+        self.name = name
+        self.fr = fr
+
+
+class Memory:
+    ''' для класса Memory: name - наименование; volume - объем памяти;
+    '''
+    def __init__(self, name: str, volume: int) -> None:
+        self.name = name
+        self.volume = volume
+
+
+class MotherBoard:
+    ''' для класса MotherBoard: name - наименование; cpu - ссылка на объект класса CPU; total_mem_slots = 4 - общее число слотов памяти (атрибут прописывается с этим значением и не меняется); mem_slots - список из объектов класса Memory (максимум total_mem_slots штук по максимальному числу слотов памяти).
+    '''
+    def __init__(self, name, cpu, mem_slots: list) -> None:
+        self.name = name
+        self.cpu = cpu
+        self.total_mem_slots = 4
+        self.mem_slots = mem_slots[:self.total_mem_slots]
+
+    def get_config(self) -> list:
+        ''' Для возвращения текущей конфигурации компонентов на материнской плате,
+        в виде следующего списка из четырех строк:
+        ['Материнская плата: <наименование>',
+        'Центральный процессор: <наименование>, <тактовая частота>',
+        'Слотов памяти: <общее число слотов памяти>',
+        'Память: <наименование_1> - <объем_1>; <наименование_2> - <объем_2>; ...; <наименование_N> - <объем_N>']
+        '''
+        config_lst = [
+            f'Материнская плата: {self.name}',
+            f'Центральный процессор: {self.cpu.name}, {self.cpu.fr}',
+            f'Слотов памяти: {self.total_mem_slots}',
+            'Память: ' +
+            '; '.join(map(lambda x: f'{x.name} - {x.volume}', self.mem_slots))]
+        return config_lst
+
+
+cpu_1 = CPU('Penek_1', 100)
+mem_1 = Memory('fast', 10)
+mem_2 = Memory('fast', 10)
+
+mb = MotherBoard('MB_1', cpu_1, [mem_1, mem_2])
+print(mb.get_config())
+"""
+"""
+# №10
+
+
+class Cart:
+    def __init__(self, goods: list = []):
+        setattr(self, 'goods', goods.copy())
+
+    def add(self, gd):  # добавление в корзину товара, объектом gd;
+        self.goods.append(gd)
+
+    def remove(self, indx):  # - удаление из корзины товара по индексу indx;
+        self.goods.pop(indx)
+
+    def get_list(self):
+        ''' Получение из корзины товаров в виде списка из строк
+        ['<наименовние_1>: <цена_1>',
+             '<наименовние_2>: <цена_2>',
+        '''
+        out_lst = [f'{el.name}: {el.price}' for el in self.goods]
+        return out_lst
+
+
+class Table:
+    ''' name - наименование;
+        price - цена.
+    '''
+    def __init__(self, name: str, price):
+        self.name = name
+        self.price = price
+
+
+class Notebook:
+    ''' name - наименование;
+        price - цена.
+    '''
+    def __init__(self, name: str, price):
+        self.name = name
+        self.price = price
+
+
+class TV:
+    ''' name - наименование;
+        price - цена.
+    '''
+    def __init__(self, name: str, price):
+        self.name = name
+        self.price = price
+
+
+class Cup:
+    ''' name - наименование;
+        price - цена.
+    '''
+    def __init__(self, name: str, price):
+        self.name = name
+        self.price = price
+
+
+cart = Cart()
+tv1 = TV("samsung", 1111)
+tv2 = TV("LG", 1234)
+table = Table("ikea", 2345)
+n1 = Notebook("msi", 5433)
+n2 = Notebook("apple", 542)
+c = Cup("keepcup", 43)
+
+cart.add(tv1)
+cart.add(tv2)
+cart.add(table)
+cart.add(n1)
+cart.add(n2)
+cart.add(c)
+print(cart.get_list())
+
+"""
+# 11
+
+"""
+class SingletonFive:
+    __instanse = None
+    __count = 0
+
+    def __new__(cls, *args, **kwargs):
+        if cls.__count < 5:
+            cls.__instanse = super().__new__(cls)
+            cls.__count += 1
+        return cls.__instanse
+
+    def __del__(self):
+        SingletonFive.__instanse = None
+        SingletonFive.__count = 0
+
+    def __init__(self, name: str) -> None:
+        self.name = name
+
+
+objs = [SingletonFive(str(n)) for n in range(10)]
+
+for el in objs:
+    print(id(el))
+"""
+"""
+#  №12
+TYPE_OS = 1  # 1 - Windows; 2 - Linux
+
+
+class DialogWindows:
+    name_class = "DialogWindows"
+
+
+class DialogLinux:
+    name_class = "DialogLinux"
+
+
+# здесь объявляйте класс Dialog
+class Dialog:
+    def __new__(cls, name: str, *args, **kwargs):
+        other_classes = (DialogWindows, DialogLinux)
+
+        if TYPE_OS == 1:
+            instance = super().__new__(other_classes[0])
+            instance.name = name
+            print(f"Я {type(instance).__name__}!")
+            return instance
+        elif TYPE_OS == 2:
+            instance = super().__new__(other_classes[1])
+            instance.name = name
+            #print(f"Я {type(instance).__name__}!")
+            return instance
+
+    def __init__(self, name: str) -> None:
+        print("Класс `Dialog` никогда не запустится!")
+
+
+dlg = Dialog('name')
 """
