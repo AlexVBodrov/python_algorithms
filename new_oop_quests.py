@@ -1,4 +1,3 @@
-'''
 class Money:
     def __init__(self, money):
         self.__money = money
@@ -342,7 +341,7 @@ class EmailValidator:
 
 res = EmailValidator.is_email_str("abc")  # True
 print(res)
-'''
+
 
 """
 # более красивый код
@@ -380,7 +379,7 @@ class EmailValidator:
     def __is_email_str(email):
         return type(email) == str
 
-
+"""
 
 # wnd = WindowDlg(заголовок окна, ширина, высота)
 
@@ -427,4 +426,3 @@ class WindowDlg:
         # "<Заголовок>: <ширина>, <высота>", например "Диалог 1: 100, 50")
         print(f"{self.__title}: {self.__width}, {self.__height}")
         
-"""
