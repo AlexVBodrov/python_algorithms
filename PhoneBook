@@ -1,0 +1,35 @@
+class PhoneBook:
+    def __init__(self) -> None:
+        self.phone_list = []
+
+    def add_phone(self, phone):
+        # добавление нового номера телефона (в список);
+        self.phone_list.append(phone)
+
+    def remove_phone(self, indx):
+        # удаление номера телефона по индексу списка;
+        self.phone_list.pop(indx)
+
+    def get_phone_list(self):
+        # получение списка из объектов всех телефонных номеров.
+        return self.phone_list
+
+
+class PhoneNumber:
+    # note = PhoneNumber(number, fio)
+    # где number - номер телефона (число) в формате XXXXXXXXXXX (одиннадцати цифр, X - цифра);
+    # fio - Ф.И.О. владельца номера (строка)
+    def __init__(self, number, fio) -> None:
+        if len(str(number)) == 11 and type(fio) is str:
+            self.number = number
+            self.fio = fio
+
+    def __repr__(self) -> str:
+        return f"{self.number} {self.fio}"
+
+
+p = PhoneBook()
+p.add_phone(PhoneNumber(12345678901, "Сергей KJfjkldsfkljs"))
+p.add_phone(PhoneNumber(21345678901, "Панда kung-fu"))
+phones = p.get_phone_list()
+print(phones)
